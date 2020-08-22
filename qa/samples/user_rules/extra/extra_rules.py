@@ -1,4 +1,4 @@
-from gitlint.rules import CommitRule, RuleViolation
+from gitlint.rules import CommitRule, RuleViolation, ConfigurationRule
 from gitlint.utils import sstr
 
 
@@ -27,3 +27,17 @@ class GitCommitRule(CommitRule):
         ]
 
         return violations
+
+
+class GitlintConfigurationRule(ConfigurationRule):
+    """ Rule that tests whether we can correctly access the config as well as modify the commit message """
+    name = "gitcommit"
+    id = "UC3"
+
+    def apply(self, config, commit):
+        # We add a line to the commit message body that pulls a value from config, this proves we can modify the body
+        # and read the config contents
+        commit.message.body.append("{0} ".format(config.target))
+
+        # We also ignore some extra rules, proving that we can modify the config
+        config.ignore.append("B4")
