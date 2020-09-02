@@ -67,12 +67,12 @@ setup(
         "License :: OSI Approved :: MIT License"
     ],
     install_requires=[
-        'Click==7.0',
-        'arrow==0.15.5',
+        'Click>=7.0',
+        'arrow>=0.15.5',
     ],
     extras_require={
         ':sys_platform != "win32"': [
-            'sh==1.12.14',
+            'sh>=1.12.14',
         ],
     },
     keywords='gitlint git lint',
